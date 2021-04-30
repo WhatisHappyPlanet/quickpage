@@ -1,0 +1,16 @@
+{
+    "name": "quickpage-cli",
+    "version": "1.0.0",
+    "description": "",
+    "main": "lib/index.js",
+    "scripts": {
+        "prepare": "tsc"
+    },
+    "dependencies": {
+        "inquirer": "^8.0.0"
+    },
+    "devDependencies": {
+        "typescript":"^4.2.4"
+    }
+  }
+  

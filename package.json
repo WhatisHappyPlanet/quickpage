@@ -1,0 +1,22 @@
+{
+  "name": "quickpage",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WhatisHappyPlanet/mpa.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/WhatisHappyPlanet/mpa/issues"
+  },
+  "homepage": "https://github.com/WhatisHappyPlanet/mpa#readme",
+  "devDependencies": {
+    "changeset": "^0.2.6"
+  }
+}
