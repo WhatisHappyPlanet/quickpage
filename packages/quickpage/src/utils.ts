@@ -4,16 +4,16 @@ import chalk from 'chalk';
 import inquirer from 'inquirer';
 
 async function writeFile(dist: string, content: string) {
-  return new Promise((resolve) => {
+  return new Promise(resolve => {
     console.log('dist :>> ', dist);
-    fs.writeFile(dist, content, function () {
+    fs.writeFile(dist, content, function() {
       resolve('done');
     });
   });
 }
 
 async function createDir(dist: string) {
-  return new Promise((resolve) => {
+  return new Promise(resolve => {
     fs.mkdirSync(dist);
     resolve('done');
   });
@@ -24,7 +24,7 @@ function copyFile(src: string, dist: string) {
 }
 
 async function readFile(src: string) {
-  return new Promise((resolve) => {
+  return new Promise(resolve => {
     fs.readFile(src, (err: any, data: any) => {
       if (!err) {
         resolve(data);
@@ -58,9 +58,9 @@ function input({ title }: { title: string }) {
 
 function info(message: string, type: 'SUCCESS' | 'ERROR') {
   if (type === 'SUCCESS') {
-    console.log(chalk.green(`[${type}]${message}`));
+    console.log(chalk.green(`[${type}] ${message}`));
   } else if (type === 'ERROR') {
-    console.log(chalk.red(`[${type}]${message}`));
+    console.log(chalk.red(`[${type}] ${message}`));
   }
 }
 
