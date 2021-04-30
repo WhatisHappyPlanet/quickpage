@@ -75,7 +75,8 @@ function info(message: string, type: string) {
 }
 
 function resolve(_path: string) {
-  return path.resolve(__dirname, '../' + _path);
+  const cwd = process.cwd();
+  return path.resolve(cwd, _path);
 }
 
 export {
