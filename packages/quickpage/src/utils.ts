@@ -33,36 +33,26 @@ async function readFile(src: string) {
   });
 }
 
-async function prompt<T>({
+async function prompt({
   title,
   choices,
 }: {
   title: string;
   choices: { name: string }[];
-}): Promise<T> {
-  return new Promise(resolve => {
-    inquirer
-      .prompt({
-        type: 'list',
-        message: title,
-        name: 'value',
-        choices: [new inquirer.Separator(' = Press enter = '), ...choices],
-      })
-      //@ts-ignore
-      .then((result: T) => {
-        resolve(result);
-      });
+}) {
+  return inquirer.prompt({
+    type: 'list',
+    message: title,
+    name: 'value',
+    choices: [new inquirer.Separator(' = Press enter = '), ...choices],
   });
 }
 
-async function input({ title }: { title: string }) {
-  return new Promise(resolve => {
-    inquirer
-      .prompt({ message: title, type: 'input', name: 'value' })
-      //@ts-ignore
-      .then((value: string) => {
-        resolve(value);
-      });
+function input({ title }: { title: string }) {
+  return inquirer.prompt({
+    message: title,
+    type: 'input',
+    name: 'value',
   });
 }
 

@@ -21,9 +21,7 @@ export const create = async () => {
     ],
   });
 
-  //@ts-ignore
   const base = utils.resolve(`pages/${projectName.value}`);
   utils.createDir(base); // 创建根目录
-  //@ts-ignore
   copySync(path.join(__dirname, `../template/${tpl.value}`), base);
 };
