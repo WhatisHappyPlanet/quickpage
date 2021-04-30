@@ -1,12 +1,20 @@
 import * as utils from './utils';
 import path from 'path';
-import { copySync } from 'fs-extra';
+import { copySync, pathExistsSync } from 'fs-extra';
+import chalk from 'chalk';
 
 export const create = async () => {
   // ask for project name
   const projectName = await utils.input({
     title: 'Please input your project name...',
   });
+
+  const base = utils.resolve(`pages/${projectName.value}`);
+
+  if (pathExistsSync(base)) {
+    console.log(chalk.red(`Project ${projectName.value} is existed`));
+    return;
+  }
 
   // select template
   const tpl = await utils.prompt({
@@ -21,7 +29,6 @@ export const create = async () => {
     ],
   });
 
-  const base = utils.resolve(`pages/${projectName.value}`);
   utils.createDir(base); // 创建根目录
   copySync(path.join(__dirname, `../template/${tpl.value}`), base);
 };

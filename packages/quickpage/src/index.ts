@@ -6,10 +6,7 @@ import { dev } from './dev';
 
 const prog = sade('quickpage');
 
-prog
-  .version('1.0.0')
-  .option('--global, -g', 'An example global flag')
-  .option('-c, --config', 'Provide path to custom config', 'foo.config.js');
+prog.version('1.0.0');
 
 prog
   .command('create')
