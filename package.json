@@ -17,6 +17,11 @@
   },
   "homepage": "https://github.com/WhatisHappyPlanet/mpa#readme",
   "devDependencies": {
-    "changeset": "^0.2.6"
+    "@changesets/cli": "^2.14.1",
+    "@typescript-eslint/eslint-plugin": "^2.12.0",
+    "@typescript-eslint/parser": "^2.12.0",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.7.0",
+    "eslint-plugin-prettier": "^3.1.2"
   }
 }

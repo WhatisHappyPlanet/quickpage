@@ -7,10 +7,16 @@
         "prepare": "tsc"
     },
     "dependencies": {
+        "sade": "1.7.4",
         "inquirer": "^8.0.0"
     },
     "devDependencies": {
-        "typescript":"^4.2.4"
+        "typescript": "^4.2.4",
+        "chalk": "^4.1.1",
+        "@types/inquirer": "^7.3.1",
+        "@types/sade": "^1.7.2"
+    },
+    "bin": {
+        "quickpage": "lib/index.js"
     }
-  }
-  
+}
