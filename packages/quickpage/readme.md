@@ -1,3 +1,26 @@
+# quickpage
+
+## Usage
+
+### create a page
+
+```bash
+quickpage create
+```
+
+### development
+
+```bash
+quickpage dev
+```
+
+### build
+
+```bash
+quickpage build
+```
+
+## Roadmap
 
 ### 已支持
 

@@ -1,3 +1,7 @@
+# create-quickpage
+
+## Usage
+
 ```bash
-npm init mpa my-mpa-app
+npm init quickpage my-mpa-app
 ```
