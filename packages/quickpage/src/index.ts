@@ -10,16 +10,15 @@ prog.version('1.0.0');
 
 prog
   .command('create')
-  .describe('Build the source directory. Expects an `index.js` entry file.')
+  .describe('create a page in this multi-page project')
   .example('build app')
   .action(() => {
-    console.log(`create`);
     create();
   });
 
 prog
   .command('dev')
-  .describe('Build the source directory. Expects an `index.js` entry file.')
+  .describe('local develope a page in this multi-page project')
   .example('dev app')
   .action(() => {
     dev();

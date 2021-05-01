@@ -14,7 +14,13 @@ The template to create the multi-page project.
 
 If you want to develope or contribute this project, you should learn how to develop a command line.
 
-First, you should link this project into your local development environment.
+First, `pnpm` is preferred in this workspace.
+
+```bash
+pnpm i
+```
+
+Second, you should link this project into your local development environment.
 
 ```bash
 cd packages/quickpage
@@ -29,4 +35,9 @@ pnpm i
 #or 
 
 pnpm run prepare --filter quickpage-cli
+
+#or
+
+pnpm run prepare --recursive
+
 ```
