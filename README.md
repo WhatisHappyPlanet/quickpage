@@ -1,14 +1,14 @@
 # QUICKPAGE
 
-A modern cli for multi page web application powered by vite.js.
+A modern cli for multi page web application powered by vite.js, which is inspired in the situation where some none-framework (or small framework) web pages are needed. We want to manage them in a high efficient way. We want to create it, develop it one by one. Finally, we want to build them on purpose.
 
 ## quickpage-cli
 
-It is the main cli for this project.
+This is the main command line project, which help you manage your tiny and simple web application.
 
 ## create-quickpage
 
-The template to create the multi-page project.
+The template to create this tiny and simple multi-page web application.
 
 ## How to contribute
 
