@@ -23,6 +23,7 @@
         "vite": "^2.2.3"
     },
     "bin": {
-        "quickpage": "lib/index.js"
+        "quickpage": "lib/index.js",
+        "qk": "lib/index.js"
     }
 }

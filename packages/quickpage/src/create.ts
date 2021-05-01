@@ -25,10 +25,10 @@ export const create = async () => {
       title: 'Select template',
       choices: [
         {
-          name: 'vanilla',
+          name: 'vanilla(html + javascript + css)',
         },
         {
-          name: 'vanilla-ts',
+          name: 'vanilla-ts(html + typescript + less)',
         },
       ],
     });
