@@ -56,11 +56,11 @@ function input({ title }: { title: string }) {
   });
 }
 
-function info(message: string, type: string) {
+function info(message: string, type: 'SUCCESS' | 'ERROR') {
   if (type === 'SUCCESS') {
-    console.log(chalk.green(message));
+    console.log(chalk.green(`[${type}] ${message}`));
   } else if (type === 'ERROR') {
-    console.log(chalk.red(message));
+    console.log(chalk.red(`[${type}] ${message}`));
   }
 }
 
