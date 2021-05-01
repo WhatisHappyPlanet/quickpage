@@ -1,0 +1,11 @@
+{
+    "name": "quickpage-starter",
+    "version": "0.0.0",
+    "scripts": {
+        "dev": "quickpage dev",
+        "build": "quickpage build"
+    },
+    "devDependencies": {
+        "quickpage": "^1.0.0"
+    }
+}
