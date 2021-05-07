@@ -20,6 +20,7 @@ export const dev = async () => {
       root: join(cwd, 'pages', projectName.value),
       server: {
         port: 3333,
+        open: true,
       },
     });
     await server.listen();
