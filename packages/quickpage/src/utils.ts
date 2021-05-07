@@ -40,7 +40,7 @@ async function prompt({
   title: string;
   choices: { name: string }[];
 }) {
-  return inquirer.prompt({
+  return inquirer.prompt<{ value: string }>({
     type: 'list',
     message: title,
     name: 'value',
@@ -49,7 +49,7 @@ async function prompt({
 }
 
 function input({ title }: { title: string }) {
-  return inquirer.prompt({
+  return inquirer.prompt<{ value: string }>({
     message: title,
     type: 'input',
     name: 'value',
