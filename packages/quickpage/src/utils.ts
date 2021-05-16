@@ -69,6 +69,16 @@ function resolve(_path: string) {
   return path.resolve(cwd, _path);
 }
 
+function loadViteConfig(configRoot: string = process.cwd()) {
+  let resolvedPath = '';
+  const jsconfigFile = path.resolve(configRoot, 'vite.config.js');
+  if (fs.existsSync(jsconfigFile)) {
+    resolvedPath = jsconfigFile;
+  }
+
+  return resolvedPath || undefined;
+}
+
 export {
   writeFile,
   createDir,
@@ -78,4 +88,5 @@ export {
   prompt,
   input,
   info,
+  loadViteConfig,
 };
