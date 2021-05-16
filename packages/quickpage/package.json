@@ -4,8 +4,8 @@
     "description": "",
     "main": "lib/index.js",
     "files": [
-       "lib",
-       "template"
+        "lib",
+        "template"
     ],
     "scripts": {
         "prepare": "tsc"
