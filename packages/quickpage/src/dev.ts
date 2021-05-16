@@ -1,6 +1,6 @@
 import { readdirSync } from 'fs-extra';
 import { createServer } from 'vite';
-import { prompt, info } from './utils';
+import { prompt, info, loadViteConfig } from './utils';
 import { join } from 'path';
 
 export const dev = async () => {
@@ -15,8 +15,7 @@ export const dev = async () => {
     const cwd = process.cwd();
 
     const server = await createServer({
-      // 任何合法的用户配置选项，加上 `mode` 和 `configFile`
-      configFile: false,
+      configFile: loadViteConfig(),
       root: join(cwd, 'pages', projectName.value),
       server: {
         port: 3333,
