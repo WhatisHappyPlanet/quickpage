@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import chalk from 'chalk';
 import inquirer from 'inquirer';
+import defaultsdeep from 'lodash.defaultsdeep';
 
 async function writeFile(dist: string, content: string) {
   return new Promise(resolve => {
@@ -79,6 +80,10 @@ function loadViteConfig(configRoot: string = process.cwd()) {
   return resolvedPath || undefined;
 }
 
+function injectPackageJson(json: { devDependencies: Object }, data: Object) {
+  return defaultsdeep(json, { devDependencies: data });
+}
+
 export {
   writeFile,
   createDir,
@@ -89,4 +94,5 @@ export {
   input,
   info,
   loadViteConfig,
+  injectPackageJson,
 };

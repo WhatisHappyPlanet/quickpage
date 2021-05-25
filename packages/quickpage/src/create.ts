@@ -1,20 +1,59 @@
 import * as utils from './utils';
 import path from 'path';
-import { copySync, pathExistsSync } from 'fs-extra';
+import {
+  copySync,
+  pathExistsSync,
+  readJsonSync,
+  writeJsonSync,
+} from 'fs-extra';
+import {
+  preactPackage,
+  sveltePackage,
+  typescriptPackage,
+  vuePackage,
+} from './constants';
+
+const VANILLIA = 'vanilla(html + javascript + css)';
+const VANILLIA_TS = 'vanilla-ts(html + typescript + less)';
+const SVELTE = 'svelte';
+const PREACT = 'preact';
+const VUE = 'vue';
+
+const CHOICES = [
+  {
+    choice: VANILLIA,
+    value: 'vanilla',
+  },
+  {
+    choice: VANILLIA_TS,
+    value: 'vanilla-ts',
+    packageJson: typescriptPackage,
+  },
+  {
+    choice: SVELTE,
+    value: 'svelte',
+    packageJson: sveltePackage,
+  },
+  {
+    choice: PREACT,
+    value: 'preact',
+    packageJson: preactPackage,
+  },
+  {
+    choice: VUE,
+    value: 'vue',
+    packageJson: vuePackage,
+  },
+];
 
 const getTemplate = (choice: string) => {
-  const mappings = [
-    {
-      choice: 'vanilla(html + javascript + css)',
-      value: 'vanilla',
-    },
-    {
-      choice: 'vanilla-ts(html + typescript + less)',
-      value: 'vanilla-ts',
-    },
-  ];
-  const res = mappings.find(s => s.choice === choice);
+  const res = CHOICES.find(s => s.choice === choice);
   return res?.value;
+};
+
+const getPackageJson = (choice: string): Object => {
+  const res = CHOICES.find(s => s.choice === choice);
+  return res?.packageJson || {};
 };
 
 export const create = async () => {
@@ -38,17 +77,15 @@ export const create = async () => {
     // select template
     const tpl = await utils.prompt({
       title: 'Select template',
-      choices: [
-        {
-          name: 'vanilla(html + javascript + css)',
-        },
-        {
-          name: 'vanilla-ts(html + typescript + less)',
-        },
-      ],
+      choices: CHOICES.map(s => ({ name: s.choice })),
     });
+    // create dir
+    await utils.createDir(base);
+    const packageJson = readJsonSync(utils.resolve('package.json'));
+    const res = utils.injectPackageJson(packageJson, getPackageJson(tpl.value));
+    writeJsonSync(utils.resolve('package.json'), res, { spaces: 4 });
 
-    await utils.createDir(base); // 创建根目录
+    // copy template
     copySync(
       path.join(__dirname, `../template/${getTemplate(tpl.value)}`),
       base
