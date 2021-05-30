@@ -1,17 +1,7 @@
 import * as utils from './utils';
 import path from 'path';
-import {
-  copySync,
-  pathExistsSync,
-  readJsonSync,
-  writeJsonSync,
-} from 'fs-extra';
-import {
-  preactPackage,
-  sveltePackage,
-  typescriptPackage,
-  vuePackage,
-} from './constants';
+import { copySync, pathExistsSync } from 'fs-extra';
+import { updatePackageJson, updatePlugins } from './preset';
 
 const VANILLIA = 'vanilla(html + javascript + css)';
 const VANILLIA_TS = 'vanilla-ts(html + typescript + less)';
@@ -27,33 +17,24 @@ const CHOICES = [
   {
     choice: VANILLIA_TS,
     value: 'vanilla-ts',
-    packageJson: typescriptPackage,
   },
   {
     choice: SVELTE,
     value: 'svelte',
-    packageJson: sveltePackage,
   },
   {
     choice: PREACT,
     value: 'preact',
-    packageJson: preactPackage,
   },
   {
     choice: VUE,
     value: 'vue',
-    packageJson: vuePackage,
   },
 ];
 
 const getTemplate = (choice: string) => {
   const res = CHOICES.find(s => s.choice === choice);
   return res?.value;
-};
-
-const getPackageJson = (choice: string): Object => {
-  const res = CHOICES.find(s => s.choice === choice);
-  return res?.packageJson || {};
 };
 
 export const create = async () => {
@@ -81,15 +62,16 @@ export const create = async () => {
     });
     // create dir
     await utils.createDir(base);
-    const packageJson = readJsonSync(utils.resolve('package.json'));
-    const res = utils.injectPackageJson(packageJson, getPackageJson(tpl.value));
-    writeJsonSync(utils.resolve('package.json'), res, { spaces: 4 });
 
     // copy template
     copySync(
       path.join(__dirname, `../template/${getTemplate(tpl.value)}`),
       base
     );
+
+    // update vite template and package.json
+    updatePlugins(tpl.value);
+    updatePackageJson(tpl.value);
   } catch (err) {
     utils.info(String(err), 'ERROR');
   }

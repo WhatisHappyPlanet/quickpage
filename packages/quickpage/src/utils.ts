@@ -80,10 +80,6 @@ function loadViteConfig(configRoot: string = process.cwd()) {
   return resolvedPath || undefined;
 }
 
-function injectPackageJson(json: { devDependencies: Object }, data: Object) {
-  return defaultsdeep(json, { devDependencies: data });
-}
-
 export {
   writeFile,
   createDir,
@@ -94,5 +90,4 @@ export {
   input,
   info,
   loadViteConfig,
-  injectPackageJson,
 };
