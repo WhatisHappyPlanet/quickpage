@@ -3,11 +3,10 @@
     "version": "0.0.0",
     "scripts": {
         "dev": "quickpage dev",
-        "build": "tsc && vite build",
+        "build": "vite build",
         "serve": "vite preview"
     },
     "devDependencies": {
-        "typescript": "^4.2.3",
         "vite": "^2.2.3"
     }
 }

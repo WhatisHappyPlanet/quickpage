@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import chalk from 'chalk';
 import inquirer from 'inquirer';
+import defaultsdeep from 'lodash.defaultsdeep';
 
 async function writeFile(dist: string, content: string) {
   return new Promise(resolve => {

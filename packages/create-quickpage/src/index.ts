@@ -1,4 +1,10 @@
-import { copySync, emptyDirSync, existsSync, mkdirSync, readdirSync } from 'fs-extra';
+import {
+  copySync,
+  emptyDirSync,
+  existsSync,
+  mkdirSync,
+  readdirSync,
+} from 'fs-extra';
 import inquirer from 'inquirer';
 import minimist from 'minimist';
 import path from 'path';

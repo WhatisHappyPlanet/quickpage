@@ -1,19 +1,39 @@
 import * as utils from './utils';
 import path from 'path';
 import { copySync, pathExistsSync } from 'fs-extra';
+import { updatePackageJson, updatePlugins } from './preset';
+
+const VANILLIA = 'vanilla(html + javascript + css)';
+const VANILLIA_TS = 'vanilla-ts(html + typescript + less)';
+const SVELTE = 'svelte';
+const PREACT = 'preact';
+const VUE = 'vue';
+
+const CHOICES = [
+  {
+    choice: VANILLIA,
+    value: 'vanilla',
+  },
+  {
+    choice: VANILLIA_TS,
+    value: 'vanilla-ts',
+  },
+  {
+    choice: SVELTE,
+    value: 'svelte',
+  },
+  {
+    choice: PREACT,
+    value: 'preact',
+  },
+  {
+    choice: VUE,
+    value: 'vue',
+  },
+];
 
 const getTemplate = (choice: string) => {
-  const mappings = [
-    {
-      choice: 'vanilla(html + javascript + css)',
-      value: 'vanilla',
-    },
-    {
-      choice: 'vanilla-ts(html + typescript + less)',
-      value: 'vanilla-ts',
-    },
-  ];
-  const res = mappings.find(s => s.choice === choice);
+  const res = CHOICES.find(s => s.choice === choice);
   return res?.value;
 };
 
@@ -38,21 +58,20 @@ export const create = async () => {
     // select template
     const tpl = await utils.prompt({
       title: 'Select template',
-      choices: [
-        {
-          name: 'vanilla(html + javascript + css)',
-        },
-        {
-          name: 'vanilla-ts(html + typescript + less)',
-        },
-      ],
+      choices: CHOICES.map(s => ({ name: s.choice })),
     });
+    // create dir
+    await utils.createDir(base);
 
-    await utils.createDir(base); // 创建根目录
+    // copy template
     copySync(
       path.join(__dirname, `../template/${getTemplate(tpl.value)}`),
       base
     );
+
+    // update vite template and package.json
+    updatePlugins(tpl.value);
+    updatePackageJson(tpl.value);
   } catch (err) {
     utils.info(String(err), 'ERROR');
   }
