@@ -6,6 +6,7 @@
         "build": "quickpage build"
     },
     "devDependencies": {
-        "quickpage": "^1.0.0"
+        "quickpage": "^1.0.0",
+        "vite": "^2.0.0"
     }
 }
