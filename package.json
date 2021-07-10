@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "commit": "git-cz"
+    "commit": "git-cz",
+    "preinstall": "npx only-allow pnpm",
+    "release": "pnpm publish --filter\"create-quickpage\" --filter=\"quickpage-cli\""
   },
   "repository": {
     "type": "git",
