@@ -1,6 +1,6 @@
 {
     "name": "create-quickpage",
-    "version": "1.0.5",
+    "version": "1.0.6",
     "description": "",
     "files": [
       "index.js",
@@ -14,7 +14,8 @@
       "minimist": "^1.2.5"
     },
     "bin": {
-      "create-quickpage": "index.js"
+      "create-quickpage": "index.js",
+      "create-qp": "index.js"
     }
   }
   
