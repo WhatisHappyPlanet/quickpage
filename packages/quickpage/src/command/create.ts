@@ -39,7 +39,7 @@ const getTemplate = (choice: string) => {
 export const create = async () => {
   // ask for project name
   try {
-    const projectName = await utils.input({
+    const projectName = await utils.inquireInput({
       title: 'Please input your project name...',
     });
     if (!pathExistsSync(utils.resolve(`pages`))) {
@@ -55,7 +55,7 @@ export const create = async () => {
     }
 
     // select template
-    const tpl = await utils.prompt({
+    const tpl = await utils.inquireList({
       title: 'Select template',
       choices: CHOICES.map(s => ({ name: s.choice })),
     });
@@ -70,6 +70,10 @@ export const create = async () => {
     // update vite template and package.json
     updatePlugins(res);
     updatePackageJson(res);
+
+    console.log(`\nDone. Now run:\n`);
+    console.log(`  pnpm install`);
+    console.log(`  pnpm run dev`);
   } catch (err) {
     utils.info(String(err), 'ERROR');
   }

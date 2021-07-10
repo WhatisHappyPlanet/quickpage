@@ -34,13 +34,11 @@ async function readFile(src: string) {
   });
 }
 
-async function prompt({
-  title,
-  choices,
-}: {
+async function inquireList(params: {
   title: string;
   choices: { name: string }[];
 }) {
+  const { title, choices } = params;
   return inquirer.prompt<{ value: string }>({
     type: 'list',
     message: title,
@@ -49,11 +47,25 @@ async function prompt({
   });
 }
 
-function input({ title }: { title: string }) {
+async function inquireInput(params: { title: string }) {
+  const { title } = params;
   return inquirer.prompt<{ value: string }>({
     message: title,
     type: 'input',
     name: 'value',
+  });
+}
+
+async function inquireCheckbox(params: {
+  title: string;
+  choices: { name: string }[];
+}) {
+  const { title, choices } = params;
+  return inquirer.prompt<{ value: string[] }>({
+    message: title,
+    type: 'checkbox',
+    name: 'value',
+    choices: [new inquirer.Separator(' = Press enter = '), ...choices],
   });
 }
 
@@ -86,8 +98,9 @@ export {
   copyFile,
   readFile,
   resolve,
-  prompt,
-  input,
+  inquireList,
+  inquireInput,
+  inquireCheckbox,
   info,
   loadViteConfig,
 };
