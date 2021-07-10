@@ -41,3 +41,9 @@ pnpm run prepare --filter quickpage-cli
 pnpm run prepare --recursive
 
 ```
+
+You can publish it by pnpm.
+
+```bash
+pnpm -r publish
+```
