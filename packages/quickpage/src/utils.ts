@@ -2,7 +2,8 @@ import fs from 'fs';
 import path from 'path';
 import chalk from 'chalk';
 import inquirer from 'inquirer';
-import defaultsdeep from 'lodash.defaultsdeep';
+import inquirerAutoComplete from 'inquirer-autocomplete-prompt';
+import fuzzy from 'fuzzy';
 
 async function writeFile(dist: string, content: string) {
   return new Promise(resolve => {
@@ -31,6 +32,36 @@ async function readFile(src: string) {
         resolve(data);
       }
     });
+  });
+}
+
+async function autoComplete(params: {
+  title: string;
+  choices: { name: string }[];
+}) {
+  const { title, choices } = params;
+
+  async function search(answers: string, input: string) {
+    input = input || '';
+    const choiceNames = choices.map(s => s.name);
+    const res = fuzzy.filter(input, choiceNames);
+    return res.map(el => el.original);
+  }
+
+  inquirer.registerPrompt('autocomplete', inquirerAutoComplete);
+  return inquirer.prompt<{ value: string }>({
+    //@ts-ignore
+    type: 'autocomplete',
+    name: 'value',
+    suggestOnly: true,
+    message: title,
+    searchText: 'Searching for you!',
+    emptyText: 'Nothing found!',
+    source: search,
+    pageSize: 10,
+    validate: function(val) {
+      return val ? true : 'Nothing found!';
+    },
   });
 }
 
@@ -101,6 +132,7 @@ export {
   inquireList,
   inquireInput,
   inquireCheckbox,
+  autoComplete,
   info,
   loadViteConfig,
 };
