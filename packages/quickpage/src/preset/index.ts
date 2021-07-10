@@ -3,6 +3,7 @@ import * as utils from '../utils';
 import * as SvelteParam from './svelte';
 import * as PreactParam from './preact';
 import * as VueParam from './vue';
+import * as ReactParam from './react';
 import * as TypescriptParam from './typescript';
 import debug from 'debug';
 import defaultsDeep from 'lodash.defaultsdeep';
@@ -20,6 +21,7 @@ function getParam(templateName: string): Param | null {
   if (templateName === 'svelte') return SvelteParam;
   if (templateName === 'preact') return PreactParam;
   if (templateName === 'vue') return VueParam;
+  if (templateName === 'react') return ReactParam;
   return null;
 }
 

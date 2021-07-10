@@ -8,6 +8,7 @@ const VANILLIA_TS = 'vanilla-ts(html + typescript + less)';
 const SVELTE = 'svelte';
 const PREACT = 'preact';
 const VUE = 'vue';
+const REACT = 'react';
 
 const CHOICES = [
   {
@@ -30,6 +31,10 @@ const CHOICES = [
     choice: VUE,
     value: 'vue',
   },
+  {
+    choice: REACT,
+    value: 'react',
+  },
 ];
 
 const getTemplate = (choice: string) => {
@@ -44,7 +49,7 @@ export const create = async () => {
       title: 'Please input your project name...',
     });
     if (!pathExistsSync(utils.resolve(`pages`))) {
-      // 不存在pages, 则先创建pages
+      // create pages dir, if not existed
       await utils.createDir(utils.resolve(`pages`));
     }
 
