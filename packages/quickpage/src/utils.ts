@@ -53,15 +53,12 @@ async function autoComplete(params: {
     //@ts-ignore
     type: 'autocomplete',
     name: 'value',
-    suggestOnly: true,
+    suggestOnly: false,
     message: title,
     searchText: 'Searching for you!',
     emptyText: 'Nothing found!',
     source: search,
     pageSize: 10,
-    validate: function(val) {
-      return val ? true : 'Nothing found!';
-    },
   });
 }
 
