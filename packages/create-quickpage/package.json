@@ -1,6 +1,6 @@
 {
     "name": "create-quickpage",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "",
     "files": [
       "lib",
@@ -20,6 +20,7 @@
       "@types/inquirer": "^7.3.1",
       "@types/minimist": "^1.2.1",
       "typescript": "^4.2.4"
-    }
+    },
+    "bin": "lib/index.js"
   }
   
