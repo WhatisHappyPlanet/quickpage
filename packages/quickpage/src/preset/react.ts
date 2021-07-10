@@ -5,6 +5,9 @@ export const importCue =
 
 export const devDependencies = {
   '@vitejs/plugin-react-refresh': '^1.3.1',
+};
+
+export const dependencies = {
   react: '^17.0.0',
   'react-dom': '^17.0.0',
 };

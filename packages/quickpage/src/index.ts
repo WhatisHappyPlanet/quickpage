@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
 import sade from 'sade';
-import { create } from './create';
-import { dev } from './dev';
+import { create } from './command/create';
+import { dev } from './command/dev';
 
 const prog = sade('quickpage');
 

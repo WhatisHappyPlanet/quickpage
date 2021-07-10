@@ -1,6 +1,6 @@
 import { readdirSync } from 'fs-extra';
 import { createServer } from 'vite';
-import { prompt, info, loadViteConfig } from './utils';
+import { prompt, info, loadViteConfig } from '../utils';
 import { join } from 'path';
 
 export const dev = async () => {

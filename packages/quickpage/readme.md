@@ -33,6 +33,5 @@ quickpage build
 
 模版支持
 
-- jade
 - less
 - sass
