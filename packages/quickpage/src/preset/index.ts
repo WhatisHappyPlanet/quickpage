@@ -1,5 +1,5 @@
 import { existsSync, readFileSync, writeFileSync } from 'fs';
-import * as utils from '../utils';
+import * as utils from '../utils/helper';
 import * as SvelteParam from './svelte';
 import * as PreactParam from './preact';
 import * as VueParam from './vue';
