@@ -1,6 +1,6 @@
 {
     "name": "quickpage-cli",
-    "version": "1.0.9",
+    "version": "1.0.10",
     "description": "A cli to build a quickpage app",
     "main": "lib/index.js",
     "files": [
