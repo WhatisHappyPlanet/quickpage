@@ -1,7 +1,7 @@
-import { info, inquireCheckbox, loadViteConfig } from '../utils';
-import { readdirSync } from 'fs-extra';
+import { info, inquireCheckbox, loadViteConfig } from '../utils/helper';
+import { readdirSync, statSync } from 'fs-extra';
 import { build as viteBuild } from 'vite';
-import { join } from 'path';
+import path from 'path';
 
 export const build = async () => {
   try {
@@ -9,17 +9,20 @@ export const build = async () => {
 
     const projectName = await inquireCheckbox({
       title: 'Select Project',
-      choices: projectNames.map((name: string) => ({ name })),
+      choices: projectNames
+      .filter(name => {
+        const file = path.resolve('pages', name);
+        return statSync(file).isDirectory()
+      })
+      .map((name) => ({ name })),
     });
-
-    const cwd = process.cwd();
 
     const promises = projectName.value.map(name => {
       return viteBuild({
         configFile: loadViteConfig(),
-        root: join(cwd, 'pages', name),
+        root: path.resolve('pages', name),
         build: {
-          outDir: join(cwd, 'dist', name),
+          outDir: path.resolve('dist', name),
         },
       });
     });

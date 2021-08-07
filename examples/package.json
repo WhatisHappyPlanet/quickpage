@@ -3,8 +3,7 @@
     "version": "0.0.0",
     "scripts": {
         "dev": "quickpage dev",
-        "build": "vite build",
-        "serve": "vite preview"
+        "build": "quickpage build"
     },
     "devDependencies": {
         "vite": "^2.2.3"
