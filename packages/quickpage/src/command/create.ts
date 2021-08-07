@@ -1,4 +1,4 @@
-import * as utils from '../utils';
+import * as utils from '../utils/helper';
 import path from 'path';
 import { copySync, pathExistsSync } from 'fs-extra';
 import { updatePackageJson, updatePlugins } from '../preset';
@@ -65,7 +65,7 @@ export const create = async () => {
     const res = getTemplate(tpl.value);
 
     // copy template
-    copySync(path.join(__dirname, `../../template/${res}`), base);
+    copySync(path.join(__dirname, `../template/${res}`), base);
 
     // update vite template and package.json
     updatePlugins(res);

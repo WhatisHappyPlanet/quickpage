@@ -1,7 +1,7 @@
-import { readdirSync } from 'fs-extra';
+import { readdirSync, statSync } from 'fs-extra';
 import { createServer } from 'vite';
-import { info, loadViteConfig, autoComplete } from '../utils';
-import { join } from 'path';
+import { info, loadViteConfig, autoComplete  } from '../utils/helper';
+import path from 'path';
 
 export const dev = async () => {
   try {
@@ -9,14 +9,17 @@ export const dev = async () => {
 
     const projectName = await autoComplete({
       title: 'Select Project',
-      choices: projectNames.map((name: string) => ({ name })),
+      choices: projectNames
+      .filter(name => {
+        const file = path.resolve('pages', name);
+        return statSync(file).isDirectory()
+      })
+      .map((name: string) => ({ name })),
     });
-
-    const cwd = process.cwd();
 
     const server = await createServer({
       configFile: loadViteConfig(),
-      root: join(cwd, 'pages', projectName.value),
+      root: path.resolve('pages', projectName.value),
       server: {
         port: 3333,
         open: true,

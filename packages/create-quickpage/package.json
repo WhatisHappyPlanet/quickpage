@@ -1,7 +1,7 @@
 {
     "name": "create-quickpage",
     "version": "1.0.7",
-    "description": "",
+    "description": "A template to create a mini project of quickpage",
     "files": [
       "index.js",
       "template"
