@@ -1,25 +1,20 @@
 {
     "name": "create-quickpage",
-    "version": "1.0.0",
-    "description": "",
+    "version": "1.0.7",
+    "description": "A template to create a mini project of quickpage",
     "files": [
-      "lib",
+      "index.js",
       "template"
     ],
-    "main": "lib/index.js",
-    "scripts": {
-      "prepare": "tsup src/index.ts -d lib"
-    },
+    "main": "index.js",
+    "scripts": {},
     "dependencies": {
-      "fs-extra": "^9.1.0",
+      "fs-extra": "^10.0.0",
       "inquirer": "^8.0.0",
       "minimist": "^1.2.5"
     },
-    "devDependencies": {
-      "@types/fs-extra": "^9.0.11",
-      "@types/inquirer": "^7.3.1",
-      "@types/minimist": "^1.2.1",
-      "tsup": "^4.13.1"
+    "bin": {
+      "create-quickpage": "index.js"
     }
   }
   

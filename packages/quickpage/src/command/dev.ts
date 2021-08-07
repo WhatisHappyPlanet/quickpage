@@ -1,13 +1,13 @@
 import { readdirSync } from 'fs-extra';
 import { createServer } from 'vite';
-import { prompt, info, loadViteConfig } from './utils';
+import { info, loadViteConfig, autoComplete } from '../utils';
 import { join } from 'path';
 
 export const dev = async () => {
   try {
     const projectNames = readdirSync('pages');
 
-    const projectName = await prompt({
+    const projectName = await autoComplete({
       title: 'Select Project',
       choices: projectNames.map((name: string) => ({ name })),
     });

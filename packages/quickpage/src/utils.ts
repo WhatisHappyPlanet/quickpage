@@ -2,7 +2,8 @@ import fs from 'fs';
 import path from 'path';
 import chalk from 'chalk';
 import inquirer from 'inquirer';
-import defaultsdeep from 'lodash.defaultsdeep';
+import inquirerAutoComplete from 'inquirer-autocomplete-prompt';
+import fuzzy from 'fuzzy';
 
 async function writeFile(dist: string, content: string) {
   return new Promise(resolve => {
@@ -34,13 +35,38 @@ async function readFile(src: string) {
   });
 }
 
-async function prompt({
-  title,
-  choices,
-}: {
+async function autoComplete(params: {
   title: string;
   choices: { name: string }[];
 }) {
+  const { title, choices } = params;
+
+  async function search(answers: string, input: string) {
+    input = input || '';
+    const choiceNames = choices.map(s => s.name);
+    const res = fuzzy.filter(input, choiceNames);
+    return res.map(el => el.original);
+  }
+
+  inquirer.registerPrompt('autocomplete', inquirerAutoComplete);
+  return inquirer.prompt<{ value: string }>({
+    //@ts-ignore
+    type: 'autocomplete',
+    name: 'value',
+    suggestOnly: false,
+    message: title,
+    searchText: 'Searching for you!',
+    emptyText: 'Nothing found!',
+    source: search,
+    pageSize: 10,
+  });
+}
+
+async function inquireList(params: {
+  title: string;
+  choices: { name: string }[];
+}) {
+  const { title, choices } = params;
   return inquirer.prompt<{ value: string }>({
     type: 'list',
     message: title,
@@ -49,11 +75,25 @@ async function prompt({
   });
 }
 
-function input({ title }: { title: string }) {
+async function inquireInput(params: { title: string }) {
+  const { title } = params;
   return inquirer.prompt<{ value: string }>({
     message: title,
     type: 'input',
     name: 'value',
+  });
+}
+
+async function inquireCheckbox(params: {
+  title: string;
+  choices: { name: string }[];
+}) {
+  const { title, choices } = params;
+  return inquirer.prompt<{ value: string[] }>({
+    message: title,
+    type: 'checkbox',
+    name: 'value',
+    choices: [new inquirer.Separator(' = Press enter = '), ...choices],
   });
 }
 
@@ -86,8 +126,10 @@ export {
   copyFile,
   readFile,
   resolve,
-  prompt,
-  input,
+  inquireList,
+  inquireInput,
+  inquireCheckbox,
+  autoComplete,
   info,
   loadViteConfig,
 };

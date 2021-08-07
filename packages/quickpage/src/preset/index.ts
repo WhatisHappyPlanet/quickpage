@@ -3,23 +3,21 @@ import * as utils from '../utils';
 import * as SvelteParam from './svelte';
 import * as PreactParam from './preact';
 import * as VueParam from './vue';
-import * as TypescriptParam from './typescript';
+import * as ReactParam from './react';
+import * as TsParam from './vanilla-ts';
 import debug from 'debug';
 import defaultsDeep from 'lodash.defaultsdeep';
+import { PresetParam } from '../interface/Preset';
+import * as CONST from '../constants';
 
 const log = debug('quickpage');
 
-interface Param {
-  newPluginCue: string;
-  importCue: string;
-  newPlugin: string;
-  devDependencies: Object;
-}
-
-function getParam(templateName: string): Param | null {
-  if (templateName === 'svelte') return SvelteParam;
-  if (templateName === 'preact') return PreactParam;
-  if (templateName === 'vue') return VueParam;
+function getParam(templateName: string): PresetParam | null {
+  if (templateName === CONST.SVELTE) return SvelteParam;
+  if (templateName === CONST.PREACT) return PreactParam;
+  if (templateName === CONST.VUE) return VueParam;
+  if (templateName === CONST.REACT) return ReactParam;
+  if (templateName === CONST.VANILLIA_TS) return TsParam;
   return null;
 }
 
@@ -34,17 +32,18 @@ function editPreset(name: string, callback: (content: string) => string) {
   if (!existsSync(presetFile)) {
     throw new Error(`[Error]: File ${name} does not exist!!`);
   }
-
   const content = readFileSync(presetFile, { encoding: 'utf-8' });
-
   const result = callback(content);
 
   writeFileSync(presetFile, result, { encoding: 'utf-8' });
 }
 
-export function addPlugins(otherPlugin: string | undefined, param: Param) {
+export function addPlugins(
+  otherPlugin: string | undefined,
+  param: PresetParam
+) {
   const { newPluginCue, newPlugin } = param;
-  if (otherPlugin?.includes(newPluginCue)) {
+  if (newPluginCue && otherPlugin?.includes(newPluginCue)) {
     return `plugins: [\n\t\t${otherPlugin}\n\t]`;
   }
   if (otherPlugin) {
@@ -75,7 +74,7 @@ export function updatePlugins(templateName: string) {
         return addPlugins(otherPlugins, param);
       });
 
-      if (!result.includes(newPluginCue)) {
+      if (newPluginCue && !result.includes(newPluginCue)) {
         result = result.replace(
           'export default defineConfig({',
           `export default defineConfig({\n\t${addPlugins('', param)},`
@@ -86,7 +85,7 @@ export function updatePlugins(templateName: string) {
         );
       }
 
-      if (!result.includes(importCue)) {
+      if (importCue && !result.includes(importCue)) {
         result = `${importCue};\n${result}`;
       }
 
@@ -98,11 +97,14 @@ export function updatePlugins(templateName: string) {
 export function updatePackageJson(templateName: string) {
   const param = getParam(templateName);
   if (param) {
-    const { devDependencies } = param;
+    const { devDependencies, dependencies } = param;
 
     editPreset('package.json', content => {
       let result = content;
-      const obj = defaultsDeep(JSON.parse(result), { devDependencies });
+      const obj = defaultsDeep(JSON.parse(result), {
+        devDependencies,
+        dependencies,
+      });
       result = JSON.stringify(obj, null, 4);
 
       return result;

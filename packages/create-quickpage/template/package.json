@@ -2,11 +2,12 @@
     "name": "quickpage-starter",
     "version": "0.0.0",
     "scripts": {
+        "create": "quickpage create",
         "dev": "quickpage dev",
         "build": "quickpage build"
     },
     "devDependencies": {
-        "quickpage": "^1.0.0",
+        "quickpage-cli": "^1.0.0",
         "vite": "^2.0.0"
     }
 }

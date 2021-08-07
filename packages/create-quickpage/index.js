@@ -1,17 +1,18 @@
-import {
+#!/usr/bin/env node
+const {
   copySync,
   emptyDirSync,
   existsSync,
   mkdirSync,
   readdirSync,
-} from 'fs-extra';
-import inquirer from 'inquirer';
-import minimist from 'minimist';
-import path from 'path';
+} = require('fs-extra');
+const inquirer = require('inquirer');
+const minimist = require('minimist');
+const path = require('path');
 
 const cwd = process.cwd();
 
-async function getValidPackageName(projectName: string) {
+async function getValidPackageName(projectName) {
   const packageNameRegExp = /^(?:@[a-z0-9-*~][a-z0-9-*._~]*\/)?[a-z0-9-~][a-z0-9-._~]*$/;
   if (packageNameRegExp.test(projectName)) {
     return projectName;
@@ -70,7 +71,7 @@ async function init() {
     }
   }
 
-  copySync(path.join(__dirname, '..', 'template'), root);
+  copySync(path.join(__dirname, 'template'), root);
 
   console.log(`\nDone. Now run:\n`);
   if (root !== cwd) {

@@ -1,50 +1,49 @@
-import * as utils from './utils';
+import * as utils from '../utils';
 import path from 'path';
 import { copySync, pathExistsSync } from 'fs-extra';
-import { updatePackageJson, updatePlugins } from './preset';
-
-const VANILLIA = 'vanilla(html + javascript + css)';
-const VANILLIA_TS = 'vanilla-ts(html + typescript + less)';
-const SVELTE = 'svelte';
-const PREACT = 'preact';
-const VUE = 'vue';
+import { updatePackageJson, updatePlugins } from '../preset';
+import * as CONST from '../constants';
 
 const CHOICES = [
   {
-    choice: VANILLIA,
-    value: 'vanilla',
+    choice: CONST.VANILLIA_TXT,
+    value: CONST.VANILLIA,
   },
   {
-    choice: VANILLIA_TS,
-    value: 'vanilla-ts',
+    choice: CONST.VANILLIA_TS_TXT,
+    value: CONST.VANILLIA_TS,
   },
   {
-    choice: SVELTE,
-    value: 'svelte',
+    choice: CONST.SVELTE,
+    value: CONST.SVELTE,
   },
   {
-    choice: PREACT,
-    value: 'preact',
+    choice: CONST.PREACT,
+    value: CONST.PREACT,
   },
   {
-    choice: VUE,
-    value: 'vue',
+    choice: CONST.VUE,
+    value: CONST.VUE,
+  },
+  {
+    choice: CONST.REACT,
+    value: CONST.REACT,
   },
 ];
 
 const getTemplate = (choice: string) => {
   const res = CHOICES.find(s => s.choice === choice);
-  return res?.value;
+  return res?.value || '';
 };
 
 export const create = async () => {
   // ask for project name
   try {
-    const projectName = await utils.input({
+    const projectName = await utils.inquireInput({
       title: 'Please input your project name...',
     });
     if (!pathExistsSync(utils.resolve(`pages`))) {
-      // 不存在pages, 则先创建pages
+      // create pages dir, if not existed
       await utils.createDir(utils.resolve(`pages`));
     }
 
@@ -56,22 +55,25 @@ export const create = async () => {
     }
 
     // select template
-    const tpl = await utils.prompt({
+    const tpl = await utils.inquireList({
       title: 'Select template',
       choices: CHOICES.map(s => ({ name: s.choice })),
     });
     // create dir
     await utils.createDir(base);
 
+    const res = getTemplate(tpl.value);
+
     // copy template
-    copySync(
-      path.join(__dirname, `../template/${getTemplate(tpl.value)}`),
-      base
-    );
+    copySync(path.join(__dirname, `../../template/${res}`), base);
 
     // update vite template and package.json
-    updatePlugins(tpl.value);
-    updatePackageJson(tpl.value);
+    updatePlugins(res);
+    updatePackageJson(res);
+
+    console.log(`\nDone. Now run:\n`);
+    console.log(`  pnpm install`);
+    console.log(`  pnpm run dev`);
   } catch (err) {
     utils.info(String(err), 'ERROR');
   }

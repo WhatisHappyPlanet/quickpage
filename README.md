@@ -1,14 +1,12 @@
 # QUICKPAGE
 
-A modern cli for multi page web application powered by vite.js, which is inspired in the situation where some none-framework (or small framework) web pages are needed. We want to manage them in a high efficient way. We want to create it, develop it one by one. Finally, we want to build them on purpose.
+<a href="https://github.com/WhatisHappyPlanet/quickpage/blob/master/LICENSE">
+  <img src="https://img.shields.io/github/license/WhatisHappyPlanet/quickpage" alt="license">
+</a>
 
-## quickpage-cli
+This repo is about modern multi-page web application powered by vite.js.
 
-This is the main command line project, which help you manage your tiny and simple web application.
-
-## create-quickpage
-
-The template to create this tiny and simple multi-page web application.
+It includes [quickpage-cli](./packages/quickpage) and [create-quickpage](./packages/create-quickpage).
 
 ## How to contribute
 
@@ -47,3 +45,7 @@ You can publish it by pnpm.
 ```bash
 pnpm -r publish
 ```
+
+## LICENSE
+
+[MIT](./LINCESE)@HappyPlanet
