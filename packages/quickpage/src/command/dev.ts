@@ -20,10 +20,6 @@ export const dev = async () => {
     const server = await createServer({
       configFile: loadViteConfig(),
       root: path.resolve('pages', projectName.value),
-      server: {
-        port: 3333,
-        open: true,
-      },
     });
     await server.listen();
   } catch (err) {
