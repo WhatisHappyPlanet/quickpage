@@ -1,8 +1,9 @@
 # quickpage
 
-<a href="https://github.com/WhatisHappyPlanet/quickpage/blob/master/LICENSE">
-  <img src="https://img.shields.io/github/license/WhatisHappyPlanet/quickpage" alt="license">
-</a>
+[![GitHub license](https://img.shields.io/github/license/WhatisHappyPlanet/quickpage)](https://github.com/WhatisHappyPlanet/quickpage/blob/master/LICENSE)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-orange.svg)](https://github.com/WhatisHappyPlanet/quickpage/compare)
+[![npm version](https://badgen.net/npm/v/quickpage-cli)](https://npm.im/quickpage)
+[![npm downloads](https://badgen.net/npm/dm/quickpage-cli)](https://npm.im/quickpage)
 
 A modern cli for multi page web application powered by vite.js, which is inspired in the situation where some none-framework (or small framework) web pages are needed. We want to manage them in a high efficient way. We want to create it, develop it one by one. Finally, we want to build them on purpose.
 
