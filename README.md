@@ -46,6 +46,12 @@ You can publish it by pnpm.
 pnpm -r publish
 ```
 
+## Screen shots
+
+![quickpage create](./screens/quickpage-create.gif)
+![quickpage dev](./screens/quickpage-dev.gif)
+![quickpage build](./screens/quickpage-build.gif)
+
 ## LICENSE
 
 [MIT](./LINCESE)@HappyPlanet
