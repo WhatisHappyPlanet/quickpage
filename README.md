@@ -48,8 +48,16 @@ pnpm -r publish
 
 ## Screen shots
 
+### create a new page
+
 ![quickpage create](./screens/quickpage-create.gif)
+
+### develop a page
+
 ![quickpage dev](./screens/quickpage-dev.gif)
+
+### build a page
+
 ![quickpage build](./screens/quickpage-build.gif)
 
 ## LICENSE
