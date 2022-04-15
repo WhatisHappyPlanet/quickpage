@@ -6,7 +6,7 @@
   "scripts": {
     "commit": "git-cz",
     "preinstall": "npx only-allow pnpm",
-    "release": "pnpm publish --filter=\"create-quickpage\" --filter=\"quickpage-cli\""
+    "release": "pnpm publish --filter=\"create-quickpage\" --filter=\"quickpage-cli\" --tag"
   },
   "repository": {
     "type": "git",
