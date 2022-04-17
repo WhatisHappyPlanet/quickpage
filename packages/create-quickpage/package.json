@@ -7,6 +7,9 @@
       "template"
     ],
     "main": "index.js",
+    "publishConfig": {
+      "access": "public"
+    },
     "scripts": {},
     "dependencies": {
       "fs-extra": "^10.0.0",

@@ -6,7 +6,7 @@
   "scripts": {
     "commit": "git-cz",
     "preinstall": "npx only-allow pnpm",
-    "release": "pnpm publish --filter=\"create-quickpage\" --filter=\"quickpage-cli\" --tag"
+    "release": "changeset publish"
   },
   "repository": {
     "type": "git",
@@ -24,6 +24,7 @@
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.7.0",
     "eslint-plugin-prettier": "^3.1.2",
-    "git-cz": "^4.7.6"
+    "git-cz": "^4.7.6",
+    "@changesets/cli": "^2.22.0"
   }
 }

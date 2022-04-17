@@ -8,6 +8,9 @@
         "lib",
         "template"
     ],
+    "publishConfig": {
+        "access": "public"
+    },
     "scripts": {
         "prepare": "tsup src/index.ts -d lib --format esm,cjs"
     },
